@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation — A &amp; B</title>
+ 
+  <!-- ============================================================
+       GOOGLE FONTS
+       Great Vibes      — flowing calligraphy script for names
+       Cormorant Garamond — refined italic serif for the ampersand
+       Playfair Display — section headings & UI text
+       Poppins          — clean UI labels
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+ 
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ 
+  <!-- ============================================================
+       PARTICLE CANVAS — gold floating particles (replaces petalCanvas)
+       CHANGE: id renamed from petalCanvas → particleCanvas
+  ============================================================ -->
+  <canvas id="particleCanvas"></canvas>
+ 
+  <!-- Paper grain texture overlay — pure CSS noise via SVG filter -->
+  <div class="paper-overlay" aria-hidden="true"></div>
+ 
+  <!-- ============================================================
+       OPENING SCREEN — VINTAGE GOLD THEME
+       CHANGE: ornate corners, gold palette, Vietnamese text
+  ============================================================ -->
+  <div id="openingScreen">
+    <div class="vt-corner vt-corner--tl"></div>
+    <div class="vt-corner vt-corner--tr"></div>
+    <div class="vt-corner vt-corner--bl"></div>
+    <div class="vt-corner vt-corner--br"></div>
+ 
+    <div class="opening-inner">
+      <div class="vt-flourish">❦</div>
+      <div class="opening-line"></div>
+      <p class="opening-label">— Trân Trọng Kính Mời —</p>
+      <h1 class="opening-names">
+        <span class="opening-bride calligraphy-name">Văn Tỵ</span>
+        <span class="opening-amp calligraphy-amp">&amp;</span>
+        <span class="opening-groom calligraphy-name">Hồng Phúc</span>
+      </h1>
+      <p class="opening-date">10 · 05 · 2026</p><!-- ✏️ -->
+      <button id="openInvitationBtn" class="btn-open">
+        <span>Mở Thiệp Cưới</span>
+        <svg class="btn-open__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <div class="opening-line"></div>
+      <div class="vt-flourish">❦</div>
+    </div>
+  </div>
+ 
+ 
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="mainContent" class="main-hidden">
+ 
+    <!-- ── NAVIGATION ──────────────────────────────────────── -->
+    <!-- CHANGE: Added #calendar link; vintage gold accent -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">Phúc <span>&amp;</span> Tỵ</a>
+        <ul class="nav-links">
+          <li><a href="#couple">Couple</a></li>
+          <li><a href="#calendar">Calendar</a></li>
+          <li><a href="#countdown">Countdown</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        
+        </ul>
+        <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <ul class="nav-mobile" id="navMobile">
+        <li><a href="#couple">Couple</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#countdown">Countdown</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        
+      </ul>
+    </nav>
+ 
+ 
+    <!-- ── HERO / SAVE THE DATE ────────────────────────────── -->
+    <!-- CHANGE: hero-vignette added; hero-ornament added; gold labels -->
+    <section id="hero">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
+ 
+      <div class="hero-content">
+        <div class="hero-ornament fade-up" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+        <p class="hero-label fade-up delay-1">Save The Date</p>
+        <h1 class="hero-names fade-up delay-2">
+          <span class="calligraphy-name">Văn Tỵ</span><!-- ✏️ -->
+          <span class="hero-amp calligraphy-amp">&amp;</span>
+          <span class="calligraphy-name">Hồng Phúc</span><!-- ✏️ -->
+        </h1>
+        <div class="hero-divider fade-up delay-3">
+          <span></span><span class="hero-divider__icon">◆</span><span></span>
+        </div>
+        <p class="hero-date fade-up delay-4">10 · 05 · 2026</p><!-- ✏️ -->
+        <p class="hero-location fade-up delay-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          xã Tiên Hiệp, huyện Lãnh Ngọc, thành phố Đà Nẵng,<!-- ✏️ -->
+        </p>
+        <a href="#couple" class="hero-scroll-cta fade-up delay-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+ 
+ 
+    <!-- ── BRIDE & GROOM ───────────────────────────────────── -->
+    <!-- CHANGE: photo-corner accents; Vietnamese text; gold role label -->
+    <section id="couple" class="section">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">The Happy Couple</p>
+        <h2 class="section-title">Chú Rể &amp;Cô Dâu</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+ 
+      <div class="couple-grid">
+        <!-- BRIDE -->
+        <div class="couple-card reveal delay-1">
+          <div class="couple-photo-wrap">
+            <div class="couple-photo">
+              <img src="images/re.JPG" alt="Bride photo" loading="lazy" />
+            </div>
+            <div class="couple-photo-frame"></div>
+            <!-- Gold corner accents — NEW -->
+            <div class="photo-corner photo-corner--tl"></div>
+            <div class="photo-corner photo-corner--tr"></div>
+            <div class="photo-corner photo-corner--bl"></div>
+            <div class="photo-corner photo-corner--br"></div>
+          </div>
+          <div class="couple-info">
+            <p class="couple-role">✦ Chú Rể ✦</p>
+            <h3 class="couple-name calligraphy-name">Văn Tỵ</h3><!-- ✏️ -->
+            <p class="couple-desc">Kiên định, ấm áp và tràn đầy tiếng cười — chàng là điểm tựa trong những cơn bão. Tình yêu của chàng là lời hứa khắc sâu vào thời gian, mạnh mẽ và chân thành từ thuở ban đầu.</p>
+          </div>
+        </div>
+ 
+        <!-- CENTER ORNAMENT -->
+        <div class="couple-center reveal delay-2">
+          <div class="couple-hearts">♡</div>
+          <div class="couple-center-line"></div>
+          <p class="couple-center-text">Mãi Mãi</p>
+          <p class="couple-center-text">Bên Nhau</p>
+          <div class="couple-center-line"></div>
+        </div>
+ 
+        <!-- GROOM -->
+        <div class="couple-card couple-card--groom reveal delay-3">
+          <div class="couple-photo-wrap">
+            <div class="couple-photo">
+              <img src="images/dau.jpg" alt="Groom photo" loading="lazy" />
+            </div>
+            <div class="couple-photo-frame"></div>
+            <div class="photo-corner photo-corner--tl"></div>
+            <div class="photo-corner photo-corner--tr"></div>
+            <div class="photo-corner photo-corner--bl"></div>
+            <div class="photo-corner photo-corner--br"></div>
+          </div>
+          <div class="couple-info">
+            <p class="couple-role">✦ Cô Dâu ✦</p>
+            <h3 class="couple-name calligraphy-name">Hồng Phúc</h3><!-- ✏️ -->
+            <p class="couple-desc">Dịu dàng, nhân hậu và rạng rỡ — nàng thắp sáng mọi nơi nàng đặt chân đến. Tình yêu của nàng nhẹ nhàng mà kiên định, như dòng sông lặng lẽ chảy về biển cả.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+ 
+    <!-- ══════════════════════════════════════════════════════════
+         NEW SECTION: VINTAGE CALENDAR CARD
+         ✏️ EDIT: month name, year, and adjust day grid for your month
+    ══════════════════════════════════════════════════════════ -->
+    <section id="calendar" class="section section--tinted">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Mark Your Calendar</p>
+        <h2 class="section-title">Ngày Trọng Đại</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+ 
+      <div class="cal-wrap reveal delay-1">
+        <div class="cal-card">
+ 
+          <!-- Month / Year header -->
+          <div class="cal-header">
+            <div class="cal-header-ornament">❦</div>
+            <p class="cal-month">Tháng Năm</p><!-- ✏️ EDIT: month name -->
+            <p class="cal-year">2026</p><!-- ✏️ EDIT: year -->
+            <div class="cal-header-ornament">❦</div>
+          </div>
+ 
+          <!-- Weekday labels row -->
+          <div class="cal-grid cal-grid--labels">
+            <span>MON</span>
+            <span>TUE</span>
+            <span>WED</span>
+            <span>THU</span>
+            <span>FRI</span>
+            <span class="cal-label--sat">SAT</span>
+            <span class="cal-label--sun">SUN</span>
+          </div>
+ 
+          <!-- ✏️ EDIT: June 2026 starts Monday (no offset needed)
+               Wedding day = 15 (Monday) → has class cal-day--wedding
+               Adjust the empty cells at start/end for your actual month -->
+          <div class="cal-grid cal-grid--days">
+
+            <div class="cal-day"></div>
+            <div class="cal-day"></div>
+            <div class="cal-day"></div>
+            <div class="cal-day"></div>
+            <div class="cal-day">1</div>
+            <div class="cal-day">2</div>
+            <div class="cal-day">3</div>
+            <div class="cal-day">4</div>
+            <div class="cal-day">5</div>
+            <div class="cal-day">6</div>
+            <div class="cal-day">7</div>
+            <div class="cal-day">8</div>
+            <div class="cal-day">9</div>
+            <!-- WEDDING DAY ↓ -->
+            <div class="cal-day cal-day--wedding" aria-label="Ngày cưới">
+              <span class="cal-day__num">10</span>
+              <!-- Heart outline with CSS heartbeat animation -->
+              <svg class="cal-heart" viewBox="0 0 64 58" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M32 52 C32 52 6 34 6 18 A14 14 0 0 1 32 10 A14 14 0 0 1 58 18 C58 34 32 52 32 52Z"/>
+              </svg>
+            </div>
+            <div class="cal-day">11</div>
+            <div class="cal-day">12</div>
+            <div class="cal-day">13</div>
+            <div class="cal-day">14</div>
+            <div class="cal-day">15</div>
+            <div class="cal-day">16</div>
+            <div class="cal-day">17</div>
+            <div class="cal-day">18</div>
+            <div class="cal-day">19</div>
+            <div class="cal-day">20</div>
+            <div class="cal-day">21</div>
+            <div class="cal-day">22</div>
+            <div class="cal-day">23</div>
+            <div class="cal-day">24</div>
+            <div class="cal-day">25</div>
+            <div class="cal-day">26</div>
+            <div class="cal-day">27</div>
+            <div class="cal-day">28</div>
+            <div class="cal-day">29</div>
+            <div class="cal-day">30</div>
+            <div class="cal-day">31</div>
+            <!-- Trailing empty cells to complete the grid row -->
+            <div class="cal-day cal-day--empty"></div>
+            <div class="cal-day cal-day--empty"></div>
+            <div class="cal-day cal-day--empty"></div>
+            <div class="cal-day cal-day--empty"></div>
+            <div class="cal-day cal-day--empty"></div>
+          </div>
+ 
+          <div class="cal-footer">
+            <p class="cal-footer-text">
+              <svg viewBox="0 0 64 58" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="13" style="display:inline-block;vertical-align:middle;margin-right:5px;">
+                <path d="M32 52 C32 52 6 34 6 18 A14 14 0 0 1 32 10 A14 14 0 0 1 58 18 C58 34 32 52 32 52Z"/>
+              </svg>
+              Ngày cưới của chúng tôi
+            </p>
+          </div>
+ 
+        </div><!-- /cal-card -->
+      </div>
+    </section>
+    <!-- END: VINTAGE CALENDAR -->
+ 
+ 
+    <!-- ── COUNTDOWN ──────────────────────────────────────── -->
+    <section id="countdown" class="section">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Đếm Ngược</p>
+        <h2 class="section-title">Đến Ngày Trọng Đại</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+      <div class="countdown-container">
+    <div class="cd-box">
+        <span class="cd-number" id="cdDays">00</span>
+        <span class="cd-label">NGÀY</span>
+    </div>
+    <div class="cd-box">
+        <span class="cd-number" id="cdHours">00</span>
+        <span class="cd-label">GIỜ</span>
+    </div>
+    <div class="cd-box">
+        <span class="cd-number" id="cdMinutes">00</span>
+        <span class="cd-label">PHÚT</span>
+    </div>
+    <div class="cd-box">
+        <span class="cd-number" id="cdSeconds">00</span>
+        <span class="cd-label">GIÂY</span>
+    </div>
+</div>
+      </div>
+    </section>
+ 
+ 
+    <!-- ── TIMELINE — FULL REDESIGN ─────────────────────────── -->
+    <!-- CHANGE: Zigzag layout, centre spine, gold SVG icons,
+         alternating .vt-event--left / .vt-event--right            -->
+    <section id="timeline" class="section section--tinted">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Chương Trình</p>
+        <h2 class="section-title">Lịch Trình Ngày Cưới</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+ 
+      <div class="vt-timeline">
+        <div class="vt-timeline__spine" aria-hidden="true"></div>
+ 
+        <!-- EVENT 1 — LEFT side -->
+        <div class="vt-event vt-event--left reveal">
+          <div class="vt-event__card">
+            <div class="vt-event__icon" aria-hidden="true">
+              <!-- Camera / Photography icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <p class="vt-event__time">11:30</p>
+            <h3 class="vt-event__title">ĐÓN KHÁCH</h3>
+            <p class="vt-event__desc">Cửa mở chào đón quý khách với hoa tươi, nhạc nhẹ và tiệc rượu khai vị ấm cúng.</p>
+          </div>
+          <div class="vt-event__dot"><span></span></div>
+        </div>
+ 
+        <!-- EVENT 2 — RIGHT side -->
+        <div class="vt-event vt-event--right reveal delay-1">
+          <div class="vt-event__dot"><span></span></div>
+          <div class="vt-event__card">
+            <div class="vt-event__icon" aria-hidden="true">
+              <!-- Wedding rings icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="7" cy="15" r="5"/>
+                <circle cx="17" cy="15" r="5"/>
+                <path d="M7 10V6l5-3 5 3v4"/>
+              </svg>
+            </div>
+            <p class="vt-event__time">11:45</p>
+            <h3 class="vt-event__title">LỄ THÀNH HÔN</h3>
+            <p class="vt-event__desc">Nghi lễ trao nhẫn và đọc lời thề hôn phối thiêng liêng trước sự chứng kiến của gia đình và bạn bè thân yêu.</p>
+          </div>
+        </div>
+ 
+        <!-- EVENT 3 — LEFT side -->
+        <div class="vt-event vt-event--left reveal delay-2">
+          <div class="vt-event__card">
+            <div class="vt-event__icon" aria-hidden="true">
+              <!-- Dining / Cloche icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M12 4a8 8 0 0 1 8 8H4a8 8 0 0 1 8-8zM4 12v2M20 12v2"/>
+              </svg>
+            </div>
+            <p class="vt-event__time">12:15</p>
+            <h3 class="vt-event__title">KHAI TIỆC</h3>
+            <p class="vt-event__desc">Tiệc cưới sang trọng với những món ăn tinh tế, nước uống và những lời chúc từ trái tim.</p>
+          </div>
+          <div class="vt-event__dot"><span></span></div>
+        </div>
+ 
+      
+ 
+      </div><!-- /vt-timeline -->
+    </section>
+    <!-- END: REDESIGNED TIMELINE -->
+ 
+ 
+    <!-- ── PHOTO GALLERY ────────────────────────────────────── -->
+    <!-- CHANGE: vintage gold frame on slider; lightbox unchanged -->
+    <section id="gallery" class="section">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Câu Chuyện Của Chúng Tôi</p>
+        <h2 class="section-title">Bộ Sưu Tập Ảnh</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+ 
+      <div class="gallery-slider reveal">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-slide" data-index="0">
+            <img src="images/nho1.JPG" alt="Wedding photo 1" loading="lazy" />
+          </div>
+          <div class="gallery-slide" data-index="1">
+            <img src="images/nho2.JPG" alt="Wedding photo 2" loading="lazy" />
+          </div>
+           <div class="gallery-slide" data-index="2">
+            <img src="images/nho3.JPG" alt="Wedding photo 5" loading="lazy" />
+          </div>
+          <div class="gallery-slide" data-index="3">
+            <img src="images/nho4.JPG" alt="Wedding photo 4" loading="lazy" />
+          </div>
+          <div class="gallery-slide" data-index="4">
+            <img src="images/nho5.JPG" alt="Wedding photo 5" loading="lazy" />
+          </div>
+           <div class="gallery-slide" data-index="5">
+            <img src="images/nho6.JPG" alt="Wedding photo 5" loading="lazy" />
+          </div>
+           <div class="gallery-slide" data-index="6">
+            <img src="images/nho7.JPG" alt="Wedding photo 5" loading="lazy" />
+          </div>
+        </div>
+        <button class="gallery-btn gallery-btn--prev" id="galleryPrev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="gallery-btn gallery-btn--next" id="galleryNext" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="gallery-dots" id="galleryDots"></div>
+      </div>
+ 
+      <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+        <button class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <img id="lightboxImg" src="" alt="Lightbox photo" />
+        <button class="lightbox-nav lightbox-nav--next" id="lightboxNext" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+      </div>
+    </section>
+ 
+ 
+
+ 
+ 
+    <!-- ── MAP / LOCATION ───────────────────────────────────── -->
+    <section id="location" class="section">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Địa Điểm</p>
+        <h2 class="section-title">Nơi Tổ Chức</h2>
+        <div class="section-rule"><span class="rule-diamond">◆</span></div>
+      </div>
+      <div class="location-wrap reveal delay-1">
+        <div class="location-info-card">
+          <svg class="location-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <p class="location-address"> Tiên Hiệp, Lãnh Ngọc,<br/>Thành phố Đà Nẵng</p><!-- ✏️ -->
+          <p class="location-note">10 / 05 / 2026 · 11:30</p><!-- ✏️ -->
+        </div>
+        <div class="map-container">
+          <iframe <<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1676.7545508015369!2d108.26258994201999!3d15.422687488699106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3169ed8af74def5d%3A0xd35d2a97fd7191a3!2zVHLGsOG7nW5nIFRp4buDdSBo4buNYyBUacOqbiBIaeG7h3A!5e1!3m2!1svi!2s!4v1777088202651!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>"
+      </div>
+    </section>
+ 
+ 
+  
+  
+ 
+ 
+    <!-- ── FOOTER — VINTAGE DARK PARCHMENT ─────────────────── -->
+    <!-- CHANGE: dark inkwell background, gold ornaments top/bottom -->
+    <footer id="footer">
+      <div class="footer-ornament-row">✦ &nbsp; ❦ &nbsp; ✦</div>
+      <div class="footer-inner">
+        <div class="footer-hearts">♡</div>
+        <p class="footer-names calligraphy-name">Văn Tỵ &amp; Hồng Phúc</p><!-- ✏️ -->
+        <p class="footer-date">10 · 05 · 2026</p><!-- ✏️ -->
+        <div class="footer-rule"></div>
+        <p class="footer-note">Làm bằng tình yêu · Mãi mãi bên nhau</p>
+      </div>
+      <div class="footer-ornament-row">✦ &nbsp; ❦ &nbsp; ✦</div>
+    </footer>
+ 
+  </main><!-- /mainContent -->
+ 
+  <!-- ============================================================
+       BACKGROUND MUSIC
+       ✏️ EDIT: Replace src with your actual music file URL.
+       Royalty-free example: a gentle piano / classical piece.
+       Autoplay is blocked by browsers — music starts on btn click.
+  ============================================================ -->
+  <audio
+    id="bgMusic"
+    loop
+    preload="auto"
+    src="mp3/vid.mp3">
+    <!-- ✏️ EDIT: replace src above with your own audio file URL  -->
+  </audio>
+ 
+  <!-- ============================================================
+       MUSIC TOGGLE — floating bottom-right button
+       Injected here so it sits above everything in the DOM.
+       Visibility managed by JS (hidden until invitation is opened).
+  ============================================================ -->
+  <button
+    id="musicToggle"
+    class="music-toggle music-toggle--hidden"
+    aria-label="Toggle background music"
+    title="Toggle music">
+ 
+    <!-- NOTE icon — shown when music IS playing -->
+    <svg class="music-icon music-icon--playing" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
+      <path d="M9 18V5l12-2v13"/>
+      <circle cx="6" cy="18" r="3"/>
+      <circle cx="18" cy="16" r="3"/>
+    </svg>
+ 
+    <!-- MUTED icon — shown when music IS paused -->
+    <svg class="music-icon music-icon--paused" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
+      <line x1="1"  y1="1"  x2="23" y2="23"/>
+      <path d="M9 4.27V5l12-2v11.27M9 9v9"/>
+      <circle cx="6" cy="18" r="3"/>
+      <circle cx="18" cy="16" r="3"/>
+    </svg>
+ 
+    <!-- Ripple ring — animated when playing -->
+    <span class="music-ripple" aria-hidden="true"></span>
+  </button>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+ 
